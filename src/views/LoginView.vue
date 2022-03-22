@@ -12,15 +12,19 @@
       <div id="Hello" v-if="seen">Hello, {{Username}}!</div>
       <div id="funny" v-if="seen" >Your password is not <span v-html="someHtml" style="color:orange"></span></div>
       <div class="btn_container">
-      <button id="btn_toregister">To register</button>
-      <button id="btn_login">Login</button>
+      <button id="btn_toregister" v-on:click="func_toregi">To register</button>
+      <button id="btn_login" v-on:click="func_post">Login</button>
+      
+      </div>
+      <div id="recover">
+          <a href="">Forget password?</a>
       </div>
   </div>
 </template>
 
 <script>
+    import axios from 'axios'
     export default  {
-
         data: function() {
             return {
                 Username: "",
@@ -33,8 +37,37 @@
             },
             someHtml: function() {
                 return (this.password.split('').reverse().join(''))
+            },
+            finish: function() {
+                if (this.Username!="" && this.password!="" ){
+                    return true
+                } else {
+                    return false
+                }
+            }
+        },
+        methods: {
+            func_post: function() {
+                console.log(this.finish)
+              if (this.finish) {
+                  axios.post('http://127.0.0.1:8000/auth/login',{
+                    "Access-Control-Allow-Origin": "http://127.0.0.1/auth/login",
+                    "username": this.Username,
+                    "password": this.password
+                  }).then(function(response) {
+                      console.log(response);
+                  }).catch(function (error) {
+                      console.log(error)
+                  })
+              } else {
+                  alert('Please complete your form')
+              } 
+            },
+            func_toregi: function() {
+                console.log('not written yet')
             }
         }
+
     }
 
 </script>
@@ -86,6 +119,14 @@
         color:white;
         background-color:#42b983;
 
+    }
+    #recover {
+        text-align:right;
+        margin-top:.5rem;
+        width: 35%;
+        margin: 0 32.5% 0 32.5%;
+        font-size: .7rem;
+        a {color:gray}
     }
 }
 
