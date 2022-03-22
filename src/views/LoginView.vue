@@ -12,7 +12,9 @@
       <div id="Hello" v-if="seen">Hello, {{Username}}!</div>
       <div id="funny" v-if="seen" >Your password is not <span v-html="someHtml" style="color:orange"></span></div>
       <div class="btn_container">
-      <button id="btn_toregister" v-on:click="func_toregi">To register</button>
+      <router-link to="/auth/register">
+            <button id="btn_toregister" >To register</button>
+      </router-link>
       <button id="btn_login" v-on:click="func_post">Login</button>
       
       </div>
@@ -81,52 +83,114 @@
     #Hello {
         padding: 1rem 0 .5rem 0;
     }
-    .btn_container{
-        box-sizing: border-box;
-        margin: 1.5rem 0 .5rem 0;
-        height: 7vh;
-        display: flex;
-        width:40%;
-        align-items: center;
-        justify-content: center;
-        margin-left:30%;
-        margin-right:30%;
-         
+    input {
+        margin-bottom: .5rem ;
     }
-    #btn_toregister {
-        width: 40%;
-        height: 5vh;
-        background-color: white;
-        border: 1px solid #42b983;
-        border-radius: .5rem;
-        color: #42b983;
-    }
-    #btn_toregister:hover{
-        color:white;
-        background-color:#42b983;
+    @media screen and (max-width:500px){
+        .btn_container{
+            box-sizing: border-box;
+            margin: 1.5rem auto .5rem auto;
+            display: flex;
+            width:170px;
+            align-items: center;
+            justify-content: center;
+            flex-direction:column;
+            a {
+                width:100%;
+                height: 5vh;
+                margin-bottom:7%;
+            }
+        }
+        #btn_login {
+            width:100%;
+            height: 5vh;
+            background-color: white;
+            border: 1px solid #42b983;
+            border-radius: .5rem;
+            color: #42b983;
+        }
+        #btn_toregister:hover{
+            color:white;
+            background-color:#42b983;
 
-    }
-    #btn_login {
-        width: 40%;
-        margin-left:7%;
-        height: 5vh;
-        background-color: white;
-        border: 1px solid #42b983;
-        border-radius: .5rem;
-        color: #42b983;
-    }
-    #btn_login:hover{
-        color:white;
-        background-color:#42b983;
+        }
+        #btn_toregister {
+            background-color: white;
+            border: 1px solid #42b983;
+            border-radius: .5rem;
+            color: #42b983;
+            height: 5vh;
+            width: 100%;
+            margin-bottom: 7%;
+            box-sizing: border-box;
+        }
+        #btn_login:hover{
+            color:white;
+            background-color:#42b983;
+            
 
+        }
+        #recover {
+            font-size: .7rem;
+            text-align:right;
+            width:150px;
+            margin-left: auto;
+            margin-right: auto;
+        }
     }
-    #recover {
-        text-align:right;
-        margin-top:.5rem;
-        width: 35%;
-        margin: 0 32.5% 0 32.5%;
-        font-size: .7rem;
-        a {color:gray}
+    @media only screen and (min-width:500px) {
+        .btn_container{
+            box-sizing: border-box;
+            margin: 1.5rem 0 .5rem 0;
+            height: 7vh;
+            display: flex;
+            width:400px;
+            align-items: center;
+            justify-content: center;
+            margin-left:auto;
+            margin-right:auto;
+            flex-direction:row-reverse;
+            a {
+            width: 40%;
+            height: 5vh;
+            }
+            #btn_login {
+                width: 40%;
+                height: 5vh;
+                background-color: white;
+                border: 1px solid #42b983;
+                border-radius: .5rem;
+                color: #42b983;
+            }
+            #btn_toregister:hover{
+                color:white;
+                background-color:#42b983;
+
+            }
+            #btn_toregister {
+                margin-left:7%;
+                background-color: white;
+                border: 1px solid #42b983;
+                border-radius: .5rem;
+                color: #42b983;
+                height: 5vh;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            #btn_login:hover{
+                color:white;
+                background-color:#42b983;
+                
+
+            }
+        }
+        #recover {
+            font-size: .7rem;
+            text-align:right;
+            width:340px;
+            margin-left: auto;
+            margin-right: auto;
+        }
     }
 }
 

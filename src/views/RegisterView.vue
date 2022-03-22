@@ -22,7 +22,9 @@
       <div id="funny" v-if="seen" >Your password is not <span v-html="someHtml" style="color:orange"></span></div> -->
       <div class="btn_container">
       <button id="btn_toregister" v-on:click="func_regi">Register</button>
-      <button id="btn_login" v-on:click="func_tolgin">To login</button>
+      <router-link to="/auth/login">
+        <button id="btn_login" v-on:click="func_tolgin">To login</button>
+      </router-link> 
       </div>
   </div>
 </template>
@@ -117,44 +119,97 @@
     input {
         margin-bottom: .5rem ;
     }
+    @media screen and (max-width:500px){
+        .btn_container{
+            box-sizing: border-box;
+            margin: 1.5rem auto .5rem auto;
+            display: flex;
+            width:170px;
+            align-items: center;
+            justify-content: center;
+            flex-direction:column;
+            a {
+                width:100%;
+                height: 5vh;
+            }
+        }
+        #btn_toregister {
+            width:100%;
+            height: 5vh;
+            background-color: white;
+            border: 1px solid #42b983;
+            border-radius: .5rem;
+            color: #42b983;
+            margin-bottom:7%;
+        }
+        #btn_toregister:hover{
+            color:white;
+            background-color:#42b983;
+
+        }
+        #btn_login {
+            background-color: white;
+            border: 1px solid #42b983;
+            border-radius: .5rem;
+            color: #42b983;
+            height: 5vh;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        #btn_login:hover{
+            color:white;
+            background-color:#42b983;
+            
+
+        }
+    }
+    @media only screen and (min-width:500px) {
     .btn_container{
         box-sizing: border-box;
         margin: 1.5rem 0 .5rem 0;
         height: 7vh;
         display: flex;
-        width:40%;
+        width:400px;
         align-items: center;
         justify-content: center;
-        margin-left:30%;
-        margin-right:30%;
-        flex-direction:row-reverse 
-    }
-    #btn_toregister {
+        margin-left:auto;
+        margin-right:auto;
+        flex-direction:row-reverse;
+        a {
         width: 40%;
         height: 5vh;
-        background-color: white;
-        border: 1px solid #42b983;
-        border-radius: .5rem;
-        color: #42b983;
-        margin-left:7%;
-    }
-    #btn_toregister:hover{
-        color:white;
-        background-color:#42b983;
+        }
+        #btn_toregister {
+            width: 40%;
+            height: 5vh;
+            background-color: white;
+            border: 1px solid #42b983;
+            border-radius: .5rem;
+            color: #42b983;
+            margin-left:7%;
+        }
+        #btn_toregister:hover{
+            color:white;
+            background-color:#42b983;
 
-    }
-    #btn_login {
-        width: 40%;
-        height: 5vh;
-        background-color: white;
-        border: 1px solid #42b983;
-        border-radius: .5rem;
-        color: #42b983;
-    }
-    #btn_login:hover{
-        color:white;
-        background-color:#42b983;
+        }
+        #btn_login {
+            background-color: white;
+            border: 1px solid #42b983;
+            border-radius: .5rem;
+            color: #42b983;
+            height: 5vh;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        #btn_login:hover{
+            color:white;
+            background-color:#42b983;
+            
 
+        }
+    }
+        
     }
 }
 
