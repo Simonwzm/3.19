@@ -163,6 +163,7 @@
 
         }
     }
+
     @media only screen and (min-width:500px) {
     .btn_container{
         box-sizing: border-box;
