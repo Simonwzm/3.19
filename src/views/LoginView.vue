@@ -50,12 +50,12 @@
             func_post: function() {
                 console.log(this.finish)
               if (this.finish) {
+                  console.log({"username": this.Username, "password": this.password})
                   axios.post('http://127.0.0.1:8000/auth/login',{
-                    "Access-Control-Allow-Origin": "http://127.0.0.1/auth/login",
                     "username": this.Username,
                     "password": this.password
                   }).then(function(response) {
-                      console.log(response);
+                      console.log(response.data["token"]);
                   }).catch(function (error) {
                       console.log(error)
                   })

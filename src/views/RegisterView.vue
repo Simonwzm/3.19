@@ -21,15 +21,15 @@
       <!-- <div id="Hello" v-if="seen">Hello, {{Username}}!</div>
       <div id="funny" v-if="seen" >Your password is not <span v-html="someHtml" style="color:orange"></span></div> -->
       <div class="btn_container">
-      <button id="btn_toregister">To register</button>
-      <button id="btn_login">Login</button>
+      <button id="btn_toregister" v-on:click="func_regi">Register</button>
+      <button id="btn_login" v-on:click="func_tolgin">To login</button>
       </div>
   </div>
 </template>
 
 <script>
+    import axios from "axios";
     export default  {
-
         data: function() {
             return {
                 Username: "",
@@ -49,6 +49,13 @@
             },
             enterpassword: function() {
                 if (this.password != "") {
+                    return true;
+                } else {
+                    return false;
+                }
+            },
+            finish: function() {
+                if (this.Username != "" && this.password != "" && this.email != "" && this.wrongEm === false && this.wrongPsw === false) {
                     return true;
                 } else {
                     return false;
@@ -74,6 +81,24 @@
                     this.wrongPsw = true
                 }
                 return;
+            },
+            func_regi: function() {
+                if (this.finish === true) {
+                    axios.post('http://127.0.0.1:8000/auth/register', {
+                        "email": this.email,
+                        "username": this.Username,
+                        "password": this.password,
+                    }).then(function(response) {
+                        console.log(response);
+                    }).then(function(error) {
+                        console.log(error);
+                    })
+                } else {
+                    alert("Please check your form");
+                }
+            },
+            func_tolgin: function() {
+
             }
         }
     }
