@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-      <sidebar v-bind:elements="elements" v-bind:isShow="isShow"></sidebar>
+      <sidebar v-bind:elements="elements" v-bind:isShow="isShow&&start"></sidebar>
       <h1>Login to your Noteapp</h1>
       <form action="">
           Username: <br>
@@ -47,11 +47,15 @@
     
                 ],
                 position: 10,
+                start:false,
             }
         },
         mounted () {
                 let c = document.querySelector('#app')
-                c.addEventListener('mousemove', this.onMouseMove);        },
+                c.addEventListener('mousemove', this.onMouseMove);
+                //增加锁扣，防止初始弹窗打开    
+                this.start=false;
+                },
         computed: {
             seen: function() {
                 return (this.Username==="" || this.password==="")?false:true
@@ -66,17 +70,9 @@
                     return false
                 }
             },
-            isShow: function() {
-                console.log(this.position);
-                if (this.position === 0  ) {
-                    return true;
-                } else {
-                    console.log('er')
-                    return false;
-                }
-            },
             isShow : function() {
-                if (this.position < 200 ) {
+                if (this.position < 150 ) {
+                    this.start=true
                     return true;
                 }
                 else {

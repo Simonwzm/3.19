@@ -1,10 +1,11 @@
 <template>
     <div class="container">
+        <sidebar v-bind:elements="elements" v-bind:isShow="isShow&&start"></sidebar>
         <div class="shell">
             <div class="box-left">
                 <h2>Login</h2>
                 <p class="scription">
-                    Once logged in, you will have full control of your notes. Try now!
+                    Tips: Try moving the mouse to the left end of the page~
                 </p>
             </div>
             <div class="box-right">
@@ -25,7 +26,11 @@
 
 <script>
 import axios from 'axios'
+import sidebar from "@/components/sidebar.vue";
 export default {
+    components: {
+        sidebar,
+    },
 
     data: function() {
         return {
@@ -33,20 +38,27 @@ export default {
             password: "",
             elements: [
                 {
-                id: 1,
-                text: "Home",
-                url: "/",
+                    id: 1,
+                    text: "Home",
+                    url: "/",
                 },
-            ]
-            }
-        },
+                {
+                    id:2,
+                    text:"Forget Password?",
+                    url: "/",
+                },
+            ],
+            position: 10,
+            start:false,
+        }
+    },
+    mounted () {
+                let c = document.querySelector('#app')
+                c.addEventListener('mousemove', this.onMouseMove);
+                //增加锁扣，防止初始弹窗打开    
+                this.start=false;
+    },
     computed: {
-        // seen: function() {
-        //     return (this.Username==="" || this.password==="")?false:true
-        // },
-        // someHtml: function() {
-        //     return (this.password.split('').reverse().join(''))
-        // },
         finish: function() {
             if (this.Username!="" && this.password!="" ){
                 return true
@@ -54,16 +66,15 @@ export default {
                 return false
             }
         },
-        show: function() {
-            let c = document.querySelector('.container')
-            c.addEventListener('click', function(e) {
-                console.log(e.clientX);
-            })
-            return true
+        isShow : function() {
+            if (this.position < 150 ) {
+                this.start=true;
+                return true;
+            }
+            else {
+                return false;
+            }
         }
-        // show: function(event) {
-        //     if ()
-        // }
     },
     methods: {
         func_post: function() {
@@ -84,6 +95,9 @@ export default {
         },
         func_toregi: function() {
             console.log('not written yet')
+        },
+        onMouseMove: function(event) {
+            this.position = event.clientX;
         }
     }
 }
@@ -116,7 +130,7 @@ export default {
 }
 .shell {
     height: 60vh;
-    width: 60%;
+    width: 57%;
     display: flex;
     flex-direction: row;
 }

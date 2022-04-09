@@ -39,10 +39,10 @@ export default {
   height: 100vh;
   width: 100%;
   // justify-content: center;
-  background-image: url("@/assets/ipexels-pixabay-33545.jpg");
-  display: flex;
   flex-direction: column;
   align-items: center;
+  display: flex;
+  background-image: url("@/assets/ipexels-pixabay-33545.jpg");
   background-size: cover;
 }
 .container {
