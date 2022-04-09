@@ -14,7 +14,7 @@
           <router-link to="/login">
             <button id="login">Login</button>
           </router-link>
-          <router-link to="/auth/register">
+          <router-link to="/register">
             <button id="register">Register</button>
           </router-link>
         </div>

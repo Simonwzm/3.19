@@ -3,7 +3,7 @@
         <sidebar v-bind:elements="elements" v-bind:isShow="isShow&&start"></sidebar>
         <div class="shell">
             <div class="box-left">
-                <h2>Login</h2>
+                <h2>Register</h2>
                 <p class="scription">
                     Tips: Try moving the mouse to the left end of the page~
                 </p>
@@ -14,10 +14,14 @@
                     <input type="text" name="username" v-model="Username"/>
                     <label for="password">Password</label>
                     <input type="text" name="password" v-model="password"/>
+                    <label for="afpsw" v-if="enterpassword">Affirm password</label>
+                    <input type="text" name="afpsw" v-model="afpsw" v-if="enterpassword" v-on:change="pswcheck">
+                    <label for="email" >Email</label>
+                    <input type="text" name="email" v-model="email" v-on:change="examine">
                 </form>
                 <div class="btnc">
                     <button  v-on:click="func_post">Login</button>
-                    <button  v-on:click="func_post">Register</button>
+                    <button  v-on:click="func_regi">Register</button>
                 </div>
             </div>
         </div>
@@ -35,6 +39,10 @@ export default {
         return {
             Username: "",
             password: "",
+            email: "",
+            afpsw: "",
+            wrongEm: false,
+            wrongPsw: false,
             elements: [
                 {
                     id: 1,
@@ -58,11 +66,18 @@ export default {
                 this.start=false;
     },
     computed: {
-        finish: function() {
-            if (this.Username!="" && this.password!="" ){
-                return true
+        enterpassword: function() {
+            if (this.password != "") {
+                return true;
             } else {
-                return false
+                return false;
+            }
+        },
+        finish: function() {
+            if (this.Username != "" && this.password != "" && this.email != "" && this.wrongEm === false && this.wrongPsw === false) {
+                return true;
+            } else {
+                return false;
             }
         },
         isShow : function() {
@@ -94,8 +109,42 @@ export default {
                 alert('Please complete your form')
             } 
         },
-        func_toregi: function() {
-            console.log('not written yet')
+        examine: function() {
+            var reMail =/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+            if (!reMail.test(this.email)) {
+                this.wrongEm = true
+                alert('not a valid email')
+            }
+            else {
+                this.wrongEm = false
+            }
+            return;
+        },
+        pswcheck: function() {
+            if (this.afpsw === this.password) {
+                this.wrongPsw = false;
+            } else {
+                alert('Inconsistent password');
+                this.wrongPsw = true
+            }
+            return;
+        },
+        func_regi: function() {
+            let that = this;
+            if (this.finish === true) {
+                axios.post('http://127.0.0.1:8000/auth/register', {
+                    "email": this.email,
+                    "username": this.Username,
+                    "password": this.password,
+                }).then(function(response) {
+                    console.log(response);
+                    that.$router.push('/');
+                }).then(function(error) {
+                    console.log(error);
+                })
+            } else {
+                alert("Please check your form");
+            }
         },
         onMouseMove: function(event) {
             this.position = event.clientX;
@@ -163,7 +212,7 @@ export default {
     border-radius: 0 10px 10px 0;
 }
 .form {
-    margin: 3rem 4rem;
+    margin: 1.5rem 4rem;
     display: flex;
     flex-direction: column;
     justify-content: start;
@@ -174,30 +223,33 @@ export default {
 }
 label {
     display: block;
-    margin: 1rem 0;
-    font-size: 1.6rem;
+    margin: .5rem 0;
+    font-size: 1.4rem;
     color: rgb(241, 241, 241);
     position: relative;
     width: 100%;
     font-weight: 100;
+}
+label:first-of-type{
+    margin-top: .7rem;
 }
 label::before {
     content: '';
     display: block;
     width: 100%;
     position: absolute;
-    top:90px;
-    height: 3px;
+    top:64px;
+    height: 2.8px;
     background-image: linear-gradient(to right, #44ffff, #b888ff);
 }
 input {
     background: transparent;
     border: 0;
-    line-height: 1.5rem;
+    line-height: 1.2rem;
     width: 100%;
     color: #f2f2f2;
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    margin-bottom: .8rem;
 }
 input:focus {
     outline:4px solid rgba(143,94,135,0.5);
@@ -206,7 +258,9 @@ input:focus {
 }
 
 .btnc {
-    margin: 1rem 4rem;
+    position: absolute;
+    bottom: .7rem;
+    margin: 1rem 4em;
     width: 70%;
     height: 6vh;
     display: flex;

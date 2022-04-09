@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import newLoginView from '../views/newLoginView.vue'
+import newRegisterView from '../views/newRegisterView.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -34,11 +35,15 @@ const routes = [
     path: '/login',
     name:'newLogin',
     component: newLoginView,
-  }
+  },
+  {
+    path: '/register',
+    name: 'newRegister',
+    component: newRegisterView,
+  },
 ]
 
 const router = new VueRouter({
   routes
 })
-
 export default router
