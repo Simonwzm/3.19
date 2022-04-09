@@ -80,6 +80,7 @@
     height: 80vh;
     box-sizing: border-box;
     padding-top: 1rem;
+    height: 100vh;
     #Hello {
         padding: 1rem 0 .5rem 0;
     }

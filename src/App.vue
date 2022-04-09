@@ -1,33 +1,25 @@
 <template>
   <div id="app">
-    <nav>
+    <!-- <nav>
       <router-link to="/auth/login">Login</router-link> |
       <router-link to="/auth/register">register</router-link>
 
-    </nav>
+    </nav> -->
     <router-view/>
   </div>
 </template>
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(to bottom right, #bdbef8, #9a9bee);
 }
 
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+body {
+  margin: 0;
+  height: 100vh;
 }
 </style>
