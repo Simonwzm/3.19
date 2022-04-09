@@ -1,5 +1,6 @@
 <template>
   <div class="login">
+      <sidebar v-bind:elements="elements" v-bind:isShow="isShow"></sidebar>
       <h1>Login to your Noteapp</h1>
       <form action="">
           Username: <br>
@@ -9,7 +10,7 @@
           <input type="text" name="password" v-model="password">
       </form>
 
-      <div id="Hello" v-if="seen">Hello, {{Username}}!</div>
+      <div id="Hello" v-if="seen">Hello, {{isShow}}!</div>
       <div id="funny" v-if="seen" >Your password is not <span v-html="someHtml" style="color:orange"></span></div>
       <div class="btn_container">
       <router-link to="/auth/register">
@@ -21,18 +22,36 @@
       <div id="recover">
           <a href="">Forget password?</a>
       </div>
+      <button v-on:click="isShow=!isShow" style="float: right"></button>
   </div>
 </template>
 
 <script>
+
+    import sidebar from "@/components/sidebar.vue";
     import axios from 'axios'
     export default  {
+        components: {
+            sidebar,
+        },
         data: function() {
             return {
                 Username: "",
-                password: ""
+                password: "",
+                elements: [
+                    {
+                    id: 1,
+                    text: "Home",
+                    url: "/",
+                    },
+    
+                ],
+                position: 10,
             }
         },
+        mounted () {
+                let c = document.querySelector('#app')
+                c.addEventListener('mousemove', this.onMouseMove);        },
         computed: {
             seen: function() {
                 return (this.Username==="" || this.password==="")?false:true
@@ -45,6 +64,23 @@
                     return true
                 } else {
                     return false
+                }
+            },
+            isShow: function() {
+                console.log(this.position);
+                if (this.position === 0  ) {
+                    return true;
+                } else {
+                    console.log('er')
+                    return false;
+                }
+            },
+            isShow : function() {
+                if (this.position < 200 ) {
+                    return true;
+                }
+                else {
+                    return false;
                 }
             }
         },
@@ -67,6 +103,9 @@
             },
             func_toregi: function() {
                 console.log('not written yet')
+            },
+            onMouseMove: function(event) {
+                this.position = event.clientX;
             }
         }
 

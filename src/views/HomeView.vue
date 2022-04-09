@@ -11,7 +11,7 @@
       </div>
       <div class="navg">
         <div class="btn_ctn">
-          <router-link to="/auth/login">
+          <router-link to="/login">
             <button id="login">Login</button>
           </router-link>
           <router-link to="/auth/register">
@@ -34,7 +34,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .home {
   height: 100vh;
   width: 100%;
@@ -119,6 +119,7 @@ button#login:hover , button#register:hover {
   transition: background-color 0.75s, border 0.75s, font-size 0.75s;
   background-color: rgba(255,255,255,0.15); 
   font-size: 1.7rem;
+  cursor: pointer;
 }
 
 a:hover {

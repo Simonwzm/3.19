@@ -15,7 +15,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: linear-gradient(to bottom right, #bdbef8, #9a9bee);
+  // background-image: linear-gradient(to bottom right, #bdbef8, #9a9bee);
+  background-image: url("@/assets/ipexels-pixabay-33545.jpg");
+  background-size: cover;
+  width: 100%;
 }
 
 body {
